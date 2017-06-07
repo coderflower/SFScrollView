@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SFScrollView_Example' do
+  pod 'SFScrollView', :path => '../'
+
+  target 'SFScrollView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
