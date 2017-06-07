@@ -1,0 +1,21 @@
+PODS:
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - SFScrollView (0.1.0):
+    - SDWebImage
+
+DEPENDENCIES:
+  - SFScrollView (from `../`)
+
+EXTERNAL SOURCES:
+  SFScrollView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SFScrollView: fd3e2df2459eaec580db1dd5de61f46cc8b909bf
+
+PODFILE CHECKSUM: '0795988fe93329baa06e25473bba3a927d098e8a'
+
+COCOAPODS: 1.2.1

@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		B8E6D69A1EE7DC5D0087CFF7 /* SFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E6D6991EE7DC5D0087CFF7 /* SFScrollView.m */; };
 		FCC24BAB0BE25FD40051E890 /* Pods_SFScrollView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2AFE058472F293DAC32B2 /* Pods_SFScrollView_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D5EA67B31203749088689E0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0D5EA67B31203749088689E0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		0F4B245BA94D6D82F3C91094 /* Pods-SFScrollView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFScrollView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SFScrollView_Tests/Pods-SFScrollView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		44E2AFE058472F293DAC32B2 /* Pods_SFScrollView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SFScrollView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E5CCA4F71F1D86BCC79F5A7 /* Pods-SFScrollView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFScrollView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SFScrollView_Example/Pods-SFScrollView_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,10 +63,12 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		762C9113B5483D63762F4E4D /* SFScrollView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SFScrollView.podspec; path = ../SFScrollView.podspec; sourceTree = "<group>"; };
+		762C9113B5483D63762F4E4D /* SFScrollView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SFScrollView.podspec; path = ../SFScrollView.podspec; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		932A6BC9B56DFD427A46265B /* Pods_SFScrollView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SFScrollView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC9A8D768AF04D450D6A45D9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B8E6D6981EE7DC5D0087CFF7 /* SFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFScrollView.h; sourceTree = "<group>"; };
+		B8E6D6991EE7DC5D0087CFF7 /* SFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFScrollView.m; sourceTree = "<group>"; };
+		DC9A8D768AF04D450D6A45D9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E816B7AFFFCFB9A3A466C986 /* Pods-SFScrollView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFScrollView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SFScrollView_Tests/Pods-SFScrollView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +148,8 @@
 			children = (
 				6003F59C195388D20070C39A /* SFAppDelegate.h */,
 				6003F59D195388D20070C39A /* SFAppDelegate.m */,
+				B8E6D6981EE7DC5D0087CFF7 /* SFScrollView.h */,
+				B8E6D6991EE7DC5D0087CFF7 /* SFScrollView.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* SFViewController.h */,
 				6003F5A6195388D20070C39A /* SFViewController.m */,
@@ -247,9 +252,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SF;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = chriscaixx;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 5XERJB6TQW;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -394,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E6D69A1EE7DC5D0087CFF7 /* SFScrollView.m in Sources */,
 				6003F59E195388D20070C39A /* SFAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SFViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
@@ -459,14 +468,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -499,13 +513,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -524,6 +543,7 @@
 			baseConfigurationReference = 59604DC03DA2F1A985B577C5 /* Pods-SFScrollView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5XERJB6TQW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SFScrollView/SFScrollView-Prefix.pch";
 				INFOPLIST_FILE = "SFScrollView/SFScrollView-Info.plist";
@@ -539,6 +559,7 @@
 			baseConfigurationReference = 4E5CCA4F71F1D86BCC79F5A7 /* Pods-SFScrollView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5XERJB6TQW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SFScrollView/SFScrollView-Prefix.pch";
 				INFOPLIST_FILE = "SFScrollView/SFScrollView-Info.plist";
