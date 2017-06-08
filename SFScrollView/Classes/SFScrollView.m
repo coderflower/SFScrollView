@@ -47,24 +47,24 @@ static CGFloat const defaultPageSize = 16;
 
 }
 
-+ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholder;
 {
-    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholer:placeholer];
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholer:placeholder];
     
     return sf_scrollView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholder:(nullable UIImage *)placeholer;
 {
     
     
-    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame placehoder:placeholer];
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame placehoder:placeholder];
     // 设置图片
     [sf_scrollView setDataSource:images];
     
     return sf_scrollView;
 }
-- (instancetype)initWithFrame:(CGRect)frame placehoder:(nullable UIImage *)placeholer
+- (instancetype)initWithFrame:(CGRect)frame placehoder:(nullable UIImage *)placeholder
 {
     SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame];
     

@@ -48,7 +48,7 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param images 图片数组
  @return SFScrollView 对象
  */
-+ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholder:(nullable UIImage * )placeholder;
 /**
  快速创建SFScrollView
  
@@ -56,7 +56,7 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param images 图片数组
  @return SFScrollView 对象
  */
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull)images placeholder:(nullable UIImage *)placeholer;
 
 /**
  快速创建SFScrollView
@@ -65,7 +65,7 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param placeholer 占位图
  @return SFScrollView 对象
  */
-- (instancetype)initWithFrame:(CGRect)frame placehoder:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame placeholder:(nullable UIImage *)placeholder;
 /**
  更新配置
 
