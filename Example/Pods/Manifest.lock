@@ -2,7 +2,7 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - SFScrollView (0.1.0):
+  - SFScrollView (0.1.1):
     - SDWebImage
 
 DEPENDENCIES:
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  SFScrollView: 41ada59742498e135b2fdc2c1da85336962c5e79
+  SFScrollView: 937612b5313d3fd1b371fca3116ab60e6236c507
 
 PODFILE CHECKSUM: '0795988fe93329baa06e25473bba3a927d098e8a'
 

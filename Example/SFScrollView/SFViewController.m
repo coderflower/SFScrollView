@@ -68,9 +68,9 @@
 
     UIImage * image =[UIImage imageNamed:@"placeholderImage"];
     /** 设置网络scrollView的Frame及所需图片*/
-    SFScrollView * netScrollView = [SFScrollView sf_scrollViewWithFrame:CGRectMake(0, 84, self.view.frame.size.width, 200) images:self.netImageArray placeholer:image];
+    SFScrollView * netScrollView = [[SFScrollView alloc] initWithFrame:CGRectMake(0, 84, self.view.frame.size.width, 200)];
     /** 设置占位图*/
-    
+    netScrollView.dataSource = self.netImageArray;
     /** 获取网络图片的index*/
     netScrollView.delegate = self;
     
@@ -89,10 +89,10 @@
     bottomLabel.text = @"加载本地图片演示";
     bottomLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:bottomLabel];
-    /** 设置网络scrollView的Frame及所需图片*/
+    
     SFScrollView * localScrollView = [SFScrollView sf_scrollViewWithFrame:CGRectMake(0, 384, self.view.frame.size.width, 200) images:self.localImageArray placeholer:image];
-    /** 设置占位图*/    
-    /** 添加到当前View上*/
+    
+    
     [self.view addSubview:localScrollView];
     _netScrollView = localScrollView;
     
@@ -104,7 +104,7 @@
     localScrollView.imageClick = ^(NSInteger selecedIndex){
         NSLog(@"使用 block 回调---> 点击了第%zd张本地图片",selecedIndex);
     };
-
+    
     
 }
 
