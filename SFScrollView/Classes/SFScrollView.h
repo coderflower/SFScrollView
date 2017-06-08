@@ -62,7 +62,7 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  快速创建SFScrollView
 
  @param frame frame
- @param placeholer 占位图
+ @param placeholder 占位图
  @return SFScrollView 对象
  */
 - (instancetype)initWithFrame:(CGRect)frame placeholder:(nullable UIImage *)placeholder;
