@@ -1,6 +1,6 @@
 {
   "name": "SFScrollView",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "summary": "轮播图",
   "description": "无限滚动轮播图",
   "homepage": "https://github.com/Caiflower/SFScrollView.git",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Caiflower/SFScrollView.git",
-    "tag": "0.1.2"
+    "tag": "0.1.3"
   },
   "platforms": {
     "ios": "8.0"

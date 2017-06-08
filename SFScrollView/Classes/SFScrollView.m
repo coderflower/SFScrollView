@@ -206,6 +206,9 @@ static CGFloat const defaultPageSize = 16;
     rightImageView.contentMode = UIViewContentModeScaleAspectFill;
     centerImageView.userInteractionEnabled = YES;
     [centerImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)]];
+    leftImageView.clipsToBounds = YES;
+    centerImageView.clipsToBounds = YES;
+    rightImageView.clipsToBounds = YES;
     
     [_scrollView addSubview:leftImageView];
     [_scrollView addSubview:centerImageView];
