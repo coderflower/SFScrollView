@@ -49,16 +49,16 @@ static CGFloat const defaultPageSize = 16;
 
 + (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholder;
 {
-    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholer:placeholder];
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholder:placeholder];
     
     return sf_scrollView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholder:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholder:(nullable UIImage *)placeholder;
 {
     
     
-    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame placehoder:placeholder];
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame placeholder:placeholder];
     // 设置图片
     [sf_scrollView setDataSource:images];
     
@@ -68,7 +68,7 @@ static CGFloat const defaultPageSize = 16;
 {
     SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame];
     
-    sf_scrollView.placeholderImage = placeholer;
+    sf_scrollView.placeholderImage = placeholder;
     
     return sf_scrollView;
 
