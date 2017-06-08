@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SFScrollViewConfig.h"
+NS_ASSUME_NONNULL_BEGIN
 typedef void(^SFImageClick)(NSInteger selecedIndex);
 @class SFScrollView;
 @protocol SFScrollViewDelegate <NSObject>
@@ -26,16 +27,15 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
 @interface SFScrollView : UIView
 
 /**
- 选中索引代理
+ 图片点击回调事件代理
  */
 @property (nonatomic, weak) id<SFScrollViewDelegate> delegate;
 
-/** 占位图*/
-@property (nonatomic, strong) UIImage *placeholderImage;
-
-/** 滚动延时*/
-@property (nonatomic, assign) NSTimeInterval autoScrollDelay;
+/**
+ 使用 Block 方式回调
+ */
 @property (nonatomic, assign) SFImageClick imageClick;
+
 /**
  快速创建SFScrollView
 
@@ -43,8 +43,21 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param images 图片数组
  @return SFScrollView 对象
  */
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> *)images;
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:( NSArray <NSString *> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
+/**
+ 快速创建SFScrollView
+ 
+ @param frame frame
+ @param images 图片数组
+ @return SFScrollView 对象
+ */
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
+/**
+ 更新配置
 
+ @param config SFScrollViewConfig对象
+ */
+- (void)updateWithConfig:(void(^)(SFScrollViewConfig *))config;
 /**
  开始滚动
  */
@@ -55,3 +68,4 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  */
 - (void)stopScroll;
 @end
+NS_ASSUME_NONNULL_END

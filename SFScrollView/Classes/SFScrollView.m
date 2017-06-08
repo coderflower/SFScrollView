@@ -14,11 +14,15 @@
 /** 滚动高度*/
 #define ScrollHeight self.frame.size.height
 
-#define pageSize 16
+
+static CGFloat const defaultPageSize = 16;
 @interface SFScrollView () <UIScrollViewDelegate>
-
-@property (nonatomic, copy) NSArray *imageArray;
-
+/** 图片数组 */
+@property (nonatomic, copy) NSArray * imageArray;
+/** 配置信息 */
+@property(nonatomic, strong)  SFScrollViewConfig *config;
+/** 滚动延时*/
+@property (nonatomic, assign) NSTimeInterval autoScrollDelay;
 @end
 @implementation SFScrollView
 {
@@ -29,6 +33,8 @@
     __weak  UIPageControl *_pageControl;
     
     __weak NSTimer *_timer;
+    /** 占位图 */
+    UIImage * _placeholderImage;
     
     /** 当前显示的是第几个*/
     NSInteger _currentIndex;
@@ -41,11 +47,19 @@
 
 }
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> *)images
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:( NSArray <NSString *> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
+{
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholer:placeholer];
+    
+    return sf_scrollView;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
 {
     if (self = [super initWithFrame:frame])
     {
         _isNetworkImage = NO;
+        _placeholderImage = placeholer;
         // 初始化内容试图
         [self initScrollView];
         // 设置图片
@@ -55,7 +69,16 @@
     }
     return self;
 }
-
+- (void)updateWithConfig:(void(^)(SFScrollViewConfig *))config
+{
+    if (config)
+    {
+        config(self.config);
+    }
+    _pageControl.pageIndicatorTintColor = self.config.pageIndicatorTintColor;
+    _pageControl.currentPageIndicatorTintColor = self.config.currentPageIndicatorTintColor;
+    self.autoScrollDelay = self.config.autoScrollDelay;
+}
 - (void)initScrollView
 {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -67,9 +90,6 @@
     
     /** 复用，创建三个*/
     scrollView.contentSize = CGSizeMake(ScrollWidth * 3, 0);
-    
-    /** 设置滚动延时时间*/
-    _autoScrollDelay = 2;
     
     /** 开始显示的是第一个   前一个是最后一个   后一个是第二张*/
     _currentIndex = 0;
@@ -148,12 +168,12 @@
  */
 -(void)initPageControl
 {
-    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0,ScrollHeight - pageSize,ScrollWidth, 8)];
+    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0,ScrollHeight - defaultPageSize,ScrollWidth, 8)];
     
     //设置页面指示器的颜色
-    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.pageIndicatorTintColor = self.config.pageIndicatorTintColor;
     //设置当前页面指示器的颜色
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.currentPageIndicatorTintColor = self.config.currentPageIndicatorTintColor;
     pageControl.numberOfPages = _maxImageCount;
     pageControl.currentPage = 0;
     
@@ -170,10 +190,12 @@
     
     CGRect frame = CGRectMake(0, 0,ScrollWidth, ScrollHeight);
     // 添加3个 imageView
-    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:frame];
-    UIImageView *centerImageView = [[UIImageView alloc] initWithFrame:CGRectOffset(frame, ScrollWidth, 0)];
-    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectOffset(frame, ScrollWidth * 2, 0)];
-    
+    UIImageView * leftImageView = [[UIImageView alloc] initWithFrame:frame];
+    leftImageView.contentMode = UIViewContentModeScaleAspectFill;
+    UIImageView * centerImageView = [[UIImageView alloc] initWithFrame:CGRectOffset(frame, ScrollWidth, 0)];
+    centerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    UIImageView * rightImageView = [[UIImageView alloc] initWithFrame:CGRectOffset(frame, ScrollWidth * 2, 0)];
+    rightImageView.contentMode = UIViewContentModeScaleAspectFill;
     centerImageView.userInteractionEnabled = YES;
     [centerImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)]];
     
@@ -189,9 +211,15 @@
 #pragma mark - ===== 调用代理方法 =====
 - (void)imageClick:(UITapGestureRecognizer *)tap
 {
-    // 调用代理方法
-    if (_delegate && [_delegate respondsToSelector:@selector(sf_scrollview:didSelectedItemAtIndex:)]) {
+    // 使用代理回调
+    if (_delegate && [_delegate respondsToSelector:@selector(sf_scrollview:didSelectedItemAtIndex:)])
+    {
         [_delegate sf_scrollview:self didSelectedItemAtIndex:_currentIndex];
+    }
+    // 使用 block 回调
+    if (self.imageClick)
+    {
+        self.imageClick(_currentIndex);
     }
 }
 
@@ -221,22 +249,22 @@
 /**
  根据索引设置图片
  
- @param LeftIndex LeftIndex
+ @param leftIndex LeftIndex
  @param centerIndex centerIndex
  @param rightIndex rightIndex
  */
-- (void)changeImageLeft:(NSInteger)LeftIndex center:(NSInteger)centerIndex right:(NSInteger)rightIndex
+- (void)changeImageLeft:(NSInteger)leftIndex center:(NSInteger)centerIndex right:(NSInteger)rightIndex
 {
     if (_isNetworkImage)
     {
-        [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[LeftIndex]] placeholderImage:_placeholderImage];
+        [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[leftIndex]] placeholderImage:_placeholderImage];
         [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[centerIndex]] placeholderImage:_placeholderImage];
         [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[rightIndex]] placeholderImage:_placeholderImage];
         
     }
     else
     {
-        _leftImageView.image = _imageArray[LeftIndex];
+        _leftImageView.image = _imageArray[leftIndex];
         _centerImageView.image = _imageArray[centerIndex];
         _rightImageView.image = _imageArray[rightIndex];
     }
@@ -332,15 +360,35 @@
     _timer = nil;
 }
 
+#pragma mark -
+#pragma mark - ===== getter =====
+- (SFScrollViewConfig *)config
+{
+    if (!_config)
+    {
+        _config =  [SFScrollViewConfig defaultConfig];
+    }
+    return _config;
+}
+/**
+ 开启滚动
+ */
 - (void)beginScroll
 {
-    NSLog(@"开启滚动");
     [self addTimer];
 }
 
+/**
+ 结束滚动
+ */
 - (void)stopScroll
 {
-    NSLog(@"停止滚动");
     [self removeTimer];
 }
+
+- (void)dealloc
+{
+    [self removeTimer];
+}
+
 @end

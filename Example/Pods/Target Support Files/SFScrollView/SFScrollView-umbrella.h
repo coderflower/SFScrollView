@@ -11,6 +11,7 @@
 #endif
 
 #import "SFScrollView.h"
+#import "SFScrollViewConfig.h"
 
 FOUNDATION_EXPORT double SFScrollViewVersionNumber;
 FOUNDATION_EXPORT const unsigned char SFScrollViewVersionString[];

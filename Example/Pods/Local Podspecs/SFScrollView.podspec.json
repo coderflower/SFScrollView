@@ -1,7 +1,7 @@
 {
   "name": "SFScrollView",
   "version": "0.1.0",
-  "summary": "A short description of SFScrollView.",
+  "summary": "轮播图",
   "description": "无限滚动轮播图",
   "homepage": "https://github.com/Caiflower/SFScrollView.git",
   "license": {

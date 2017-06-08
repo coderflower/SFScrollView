@@ -9,8 +9,10 @@
 #import "SFViewController.h"
 #import "SFScrollView.h"
 @interface SFViewController ()<SFScrollViewDelegate>
-@property (nonatomic, strong) NSArray * NetImageArray;
-@property (nonatomic, strong) SFScrollView * WYNetScrollView;
+@property (nonatomic, strong) NSArray * netImageArray;
+@property (nonatomic, strong) SFScrollView * netScrollView;
+/** 本地图片数组*/
+@property(nonatomic,strong)NSArray *localImageArray;
 @end
 
 @implementation SFViewController
@@ -30,43 +32,79 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [_WYNetScrollView beginScroll];
+    [_netScrollView beginScroll];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    [_WYNetScrollView stopScroll];
+    [_netScrollView stopScroll];
 }
 
--(NSArray *)NetImageArray
+-(NSArray *)netImageArray
 {
-    if(!_NetImageArray)
+    if(!_netImageArray)
     {
-        _NetImageArray = @[@"http://ws.xzhushou.cn/focusimg/201508201549023.jpg",@"http://ws.xzhushou.cn/focusimg/52.jpg",@"http://ws.xzhushou.cn/focusimg/51.jpg",@"http://ws.xzhushou.cn/focusimg/50.jpg"];
+        _netImageArray = @[@"http://ws.xzhushou.cn/focusimg/201508201549023.jpg",@"http://ws.xzhushou.cn/focusimg/52.jpg",@"http://ws.xzhushou.cn/focusimg/51.jpg",@"http://ws.xzhushou.cn/focusimg/50.jpg"];
     }
-    return _NetImageArray;
+    return _netImageArray;
 }
-
+-(NSArray *)localImageArray
+{
+    if(!_localImageArray)
+    {
+        _localImageArray = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
+    }
+    return _localImageArray;
+}
 -(void)createNetScrollView
 {
+    UILabel * topLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 20)];
+    
+    topLable.text = @"加载网络图片演示";
+    topLable.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:topLable];
+
+    UIImage * image =[UIImage imageNamed:@"placeholderImage"];
     /** 设置网络scrollView的Frame及所需图片*/
-    SFScrollView *WYNetScrollView = [[SFScrollView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 200) images:self.NetImageArray];
-    
-    /** 设置滚动延时*/
-    WYNetScrollView.autoScrollDelay = 3;
-    
+    SFScrollView * netScrollView = [SFScrollView sf_scrollViewWithFrame:CGRectMake(0, 84, self.view.frame.size.width, 200) images:self.netImageArray placeholer:image];
     /** 设置占位图*/
-    WYNetScrollView.placeholderImage = [UIImage imageNamed:@"placeholderImage"];
-    
     
     /** 获取网络图片的index*/
-    WYNetScrollView.delegate = self;
+    netScrollView.delegate = self;
     
     /** 添加到当前View上*/
-    [self.view addSubview:WYNetScrollView];
-    _WYNetScrollView = WYNetScrollView;
+    [self.view addSubview:netScrollView];
+    _netScrollView = netScrollView;
+    
+    [netScrollView updateWithConfig:^(SFScrollViewConfig * config) {
+        config.pageIndicatorTintColor = [UIColor redColor];
+        config.currentPageIndicatorTintColor = [UIColor yellowColor];
+        config.autoScrollDelay = 5;
+    }];
+   
+    UILabel * bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 364, self.view.frame.size.width, 20)];;
+
+    bottomLabel.text = @"加载本地图片演示";
+    bottomLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:bottomLabel];
+    /** 设置网络scrollView的Frame及所需图片*/
+    SFScrollView * localScrollView = [SFScrollView sf_scrollViewWithFrame:CGRectMake(0, 384, self.view.frame.size.width, 200) images:self.localImageArray placeholer:image];
+    /** 设置占位图*/    
+    /** 添加到当前View上*/
+    [self.view addSubview:localScrollView];
+    _netScrollView = localScrollView;
+    
+    [localScrollView updateWithConfig:^(SFScrollViewConfig * config) {
+        config.pageIndicatorTintColor = [UIColor purpleColor];
+        config.currentPageIndicatorTintColor = [UIColor blueColor];
+    }];
+    
+    localScrollView.imageClick = ^(NSInteger selecedIndex){
+        NSLog(@"使用 block 回调---> 点击了第%zd张本地图片",selecedIndex);
+    };
+
     
 }
 
@@ -84,7 +122,7 @@
 
 - (void)sf_scrollview:(SFScrollView *)scrollview didSelectedItemAtIndex:(NSInteger)index
 {
-    NSLog(@"点击了第%zd张图片",index);
+    NSLog(@"使用代理回调---> 点击了第%zd张网络图片",index);
 }
 
 - (void)didReceiveMemoryWarning
