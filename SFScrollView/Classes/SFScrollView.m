@@ -17,12 +17,13 @@
 
 static CGFloat const defaultPageSize = 16;
 @interface SFScrollView () <UIScrollViewDelegate>
-/** 图片数组 */
-@property (nonatomic, copy) NSArray * imageArray;
+
 /** 配置信息 */
 @property(nonatomic, strong)  SFScrollViewConfig *config;
 /** 滚动延时*/
 @property (nonatomic, assign) NSTimeInterval autoScrollDelay;
+/** 占位图 */
+@property(nonatomic, strong)UIImage * placeholderImage;
 @end
 @implementation SFScrollView
 {
@@ -33,8 +34,7 @@ static CGFloat const defaultPageSize = 16;
     __weak  UIPageControl *_pageControl;
     
     __weak NSTimer *_timer;
-    /** 占位图 */
-    UIImage * _placeholderImage;
+    
     
     /** 当前显示的是第几个*/
     NSInteger _currentIndex;
@@ -47,28 +47,44 @@ static CGFloat const defaultPageSize = 16;
 
 }
 
-+ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:( NSArray <NSString *> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
 {
     SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame images:images placeholer:placeholer];
     
     return sf_scrollView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage *)placeholer;
+{
+    
+    
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame placehoder:placeholer];
+    // 设置图片
+    [sf_scrollView setDataSource:images];
+    
+    return sf_scrollView;
+}
+- (instancetype)initWithFrame:(CGRect)frame placehoder:(nullable UIImage *)placeholer
+{
+    SFScrollView * sf_scrollView = [[SFScrollView alloc] initWithFrame:frame];
+    
+    sf_scrollView.placeholderImage = placeholer;
+    
+    return sf_scrollView;
+
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame])
     {
         _isNetworkImage = NO;
-        _placeholderImage = placeholer;
         // 初始化内容试图
         [self initScrollView];
-        // 设置图片
-        [self setImageArray:images];
-        
-        [self setMaxImageCount:_imageArray.count];
     }
     return self;
 }
+
 - (void)updateWithConfig:(void(^)(SFScrollViewConfig *))config
 {
     if (config)
@@ -101,28 +117,20 @@ static CGFloat const defaultPageSize = 16;
 /**
  设置数据源
 
- @param imageArray 数据源
+ @param dataSource 数据源
  */
--(void)setImageArray:(NSArray <NSString *>*)imageArray
+- (void)setDataSource:(NSArray<id<SFScrollViewProtocol>> *)dataSource
 {
     // 判断是否是网络图片
-    if ([imageArray.firstObject hasPrefix:@"http"])
+    id<SFScrollViewProtocol> firstItme = dataSource.firstObject;
+    if ([firstItme.imageName hasPrefix:@"http"])
     {
         _isNetworkImage = YES;
     }
-    if (_isNetworkImage)
-    {
-        _imageArray = [imageArray copy];
-    }
-    else
-    {
-        NSMutableArray *localimageArray = [NSMutableArray arrayWithCapacity:imageArray.count];
-        for (NSString * imageLink in imageArray) {
-            UIImage * image = [UIImage imageNamed:imageLink];
-            [localimageArray addObject:image];
-        }
-        _imageArray = [localimageArray copy];
-    }
+    _dataSource = [dataSource copy];
+    
+    [self setMaxImageCount:_dataSource.count];
+
 }
 
 - (void)didMoveToWindow
@@ -257,16 +265,15 @@ static CGFloat const defaultPageSize = 16;
 {
     if (_isNetworkImage)
     {
-        [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[leftIndex]] placeholderImage:_placeholderImage];
-        [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[centerIndex]] placeholderImage:_placeholderImage];
-        [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[rightIndex]] placeholderImage:_placeholderImage];
-        
+        [_leftImageView sd_setImageWithURL:[NSURL URLWithString:_dataSource[leftIndex].imageName] placeholderImage:_placeholderImage];
+        [_centerImageView sd_setImageWithURL:[NSURL URLWithString:_dataSource[centerIndex].imageName] placeholderImage:_placeholderImage];
+        [_rightImageView sd_setImageWithURL:[NSURL URLWithString:_dataSource[rightIndex].imageName] placeholderImage:_placeholderImage];
     }
     else
     {
-        _leftImageView.image = _imageArray[leftIndex];
-        _centerImageView.image = _imageArray[centerIndex];
-        _rightImageView.image = _imageArray[rightIndex];
+        _leftImageView.image = [UIImage imageNamed:_dataSource[leftIndex].imageName];
+        _centerImageView.image = [UIImage imageNamed:_dataSource[centerIndex].imageName];
+        _rightImageView.image = [UIImage imageNamed:_dataSource[rightIndex].imageName];
     }
     
     [_scrollView setContentOffset:CGPointMake(ScrollWidth, 0)];

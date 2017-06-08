@@ -7,7 +7,8 @@
 //
 
 #import "SFViewController.h"
-#import "SFScrollView.h"
+#import <SFScrollView/SFScrollView.h>
+#import "SFImageItem.h"
 @interface SFViewController ()<SFScrollViewDelegate>
 @property (nonatomic, strong) NSArray * netImageArray;
 @property (nonatomic, strong) SFScrollView * netScrollView;
@@ -46,7 +47,16 @@
 {
     if(!_netImageArray)
     {
-        _netImageArray = @[@"http://ws.xzhushou.cn/focusimg/201508201549023.jpg",@"http://ws.xzhushou.cn/focusimg/52.jpg",@"http://ws.xzhushou.cn/focusimg/51.jpg",@"http://ws.xzhushou.cn/focusimg/50.jpg"];
+        NSArray * tmp = @[@"http://ws.xzhushou.cn/focusimg/201508201549023.jpg",@"http://ws.xzhushou.cn/focusimg/52.jpg",@"http://ws.xzhushou.cn/focusimg/51.jpg",@"http://ws.xzhushou.cn/focusimg/50.jpg"];
+
+        NSMutableArray * tmpM = [NSMutableArray array];
+        for (NSString * name in tmp) {
+            SFImageItem * item = [[SFImageItem alloc] init];
+            
+            item.imageName = name;
+            [tmpM addObject:item];
+        }
+        _netImageArray = [tmpM copy];
     }
     return _netImageArray;
 }
@@ -54,7 +64,16 @@
 {
     if(!_localImageArray)
     {
-        _localImageArray = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
+        NSArray * tmp = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
+        
+        NSMutableArray * tmpM = [NSMutableArray array];
+        for (NSString * name in tmp) {
+            SFImageItem * item = [[SFImageItem alloc] init];
+            
+            item.imageName = name;
+            [tmpM addObject:item];
+        }
+        _localImageArray = [tmpM copy];
     }
     return _localImageArray;
 }
@@ -68,7 +87,7 @@
 
     UIImage * image =[UIImage imageNamed:@"placeholderImage"];
     /** 设置网络scrollView的Frame及所需图片*/
-    SFScrollView * netScrollView = [[SFScrollView alloc] initWithFrame:CGRectMake(0, 84, self.view.frame.size.width, 200)];
+    SFScrollView * netScrollView = [[SFScrollView alloc] initWithFrame:CGRectMake(0, 84, self.view.frame.size.width, 200) placehoder:image];
     /** 设置占位图*/
     netScrollView.dataSource = self.netImageArray;
     /** 获取网络图片的index*/
@@ -123,6 +142,10 @@
 - (void)sf_scrollview:(SFScrollView *)scrollview didSelectedItemAtIndex:(NSInteger)index
 {
     NSLog(@"使用代理回调---> 点击了第%zd张网络图片",index);
+    
+    
+    
+    NSLog(@"%@",self.netImageArray[index]);
 }
 
 - (void)didReceiveMemoryWarning

@@ -6,8 +6,10 @@
 //  Copyright © 2017年 chriscaixx. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "SFScrollViewConfig.h"
+#import "SFScrollViewProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^SFImageClick)(NSInteger selecedIndex);
 @class SFScrollView;
@@ -25,7 +27,10 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
 
 @end
 @interface SFScrollView : UIView
-
+/** 
+ 图片数组
+ */
+@property (nonatomic, copy) NSArray <id<SFScrollViewProtocol>> * dataSource;
 /**
  图片点击回调事件代理
  */
@@ -43,7 +48,7 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param images 图片数组
  @return SFScrollView 对象
  */
-+ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:( NSArray <NSString *> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
++ (instancetype)sf_scrollViewWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull )images placeholer:(nullable UIImage * )placeholer;
 /**
  快速创建SFScrollView
  
@@ -51,7 +56,16 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
  @param images 图片数组
  @return SFScrollView 对象
  */
-- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <NSString *> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
+- (instancetype)initWithFrame:(CGRect)frame images:(NSArray <id<SFScrollViewProtocol>> * _Nonnull)images placeholer:(nullable UIImage *)placeholer;
+
+/**
+ 快速创建SFScrollView
+
+ @param frame frame
+ @param placeholer 占位图
+ @return SFScrollView 对象
+ */
+- (instancetype)initWithFrame:(CGRect)frame placehoder:(nullable UIImage *)placeholer;
 /**
  更新配置
 
@@ -69,3 +83,8 @@ typedef void(^SFImageClick)(NSInteger selecedIndex);
 - (void)stopScroll;
 @end
 NS_ASSUME_NONNULL_END
+
+
+
+
+

@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		B819A1151EE9280100405722 /* SFImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B819A1141EE9280100405722 /* SFImageItem.m */; };
 		FCC24BAB0BE25FD40051E890 /* Pods_SFScrollView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E2AFE058472F293DAC32B2 /* Pods_SFScrollView_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,8 @@
 		762C9113B5483D63762F4E4D /* SFScrollView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SFScrollView.podspec; path = ../SFScrollView.podspec; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		932A6BC9B56DFD427A46265B /* Pods_SFScrollView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SFScrollView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B819A1131EE9280100405722 /* SFImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFImageItem.h; sourceTree = "<group>"; };
+		B819A1141EE9280100405722 /* SFImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFImageItem.m; sourceTree = "<group>"; };
 		DC9A8D768AF04D450D6A45D9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E816B7AFFFCFB9A3A466C986 /* Pods-SFScrollView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFScrollView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SFScrollView_Tests/Pods-SFScrollView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +151,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* SFViewController.h */,
 				6003F5A6195388D20070C39A /* SFViewController.m */,
+				B819A1131EE9280100405722 /* SFImageItem.h */,
+				B819A1141EE9280100405722 /* SFImageItem.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -400,6 +405,7 @@
 				6003F59E195388D20070C39A /* SFAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SFViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				B819A1151EE9280100405722 /* SFImageItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
